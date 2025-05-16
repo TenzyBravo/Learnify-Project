@@ -5,8 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About - Learnify</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #toggleBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #66ff66;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1001;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+  <button id="toggleBtn">Toggle Reptile</button>
+  <canvas id="reptileCanvas"></canvas>
+
   <header>
     <div class="container">
       <h1>Learnify</h1>
@@ -34,5 +61,117 @@
       <p>&copy; 2025 Learnify Academy</p>
     </div>
   </footer>
+
+  <script>
+    const canvas = document.getElementById("reptileCanvas");
+    const ctx = canvas.getContext("2d");
+    let enabled = true;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+
+    class Segment {
+      constructor(x, y, length, angle = 0) {
+        this.x = x;
+        this.y = y;
+        this.length = length;
+        this.angle = angle;
+        this.colorHue = Math.random() * 360;
+      }
+
+      follow(targetX, targetY) {
+        const dx = targetX - this.x;
+        const dy = targetY - this.y;
+        this.angle = Math.atan2(dy, dx);
+        const tx = targetX - Math.cos(this.angle) * this.length;
+        const ty = targetY - Math.sin(this.angle) * this.length;
+        this.x += (tx - this.x) * 0.2;
+        this.y += (ty - this.y) * 0.2;
+      }
+
+      draw(ctx, index) {
+        const endX = this.x + Math.cos(this.angle) * this.length;
+        const endY = this.y + Math.sin(this.angle) * this.length;
+
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(endX, endY);
+        ctx.strokeStyle = `hsl(${(this.colorHue + index * 10) % 360}, 100%, 70%)`;
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+
+        for (let i = -1; i <= 1; i += 2) {
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          const legAngle = Math.sin(Date.now() / 150 + index) * 0.5;
+          const lx = Math.cos(legAngle) * 10 * i;
+          const ly = Math.sin(legAngle) * 10;
+          ctx.lineTo(lx, ly);
+          ctx.strokeStyle = "white";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    const segments = [];
+    const segmentCount = 20;
+    const segmentLength = 20;
+
+    for (let i = 0; i < segmentCount; i++) {
+      segments.push(new Segment(mouse.x, mouse.y, segmentLength));
+    }
+
+    canvas.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    document.getElementById("toggleBtn").addEventListener("click", () => {
+      enabled = !enabled;
+      if (!enabled) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+
+    function animate() {
+      if (!enabled) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      segments[0].follow(mouse.x, mouse.y);
+
+      for (let i = 1; i < segments.length; i++) {
+        const prev = segments[i - 1];
+        segments[i].follow(
+          prev.x + Math.cos(prev.angle) * segmentLength,
+          prev.y + Math.sin(prev.angle) * segmentLength
+        );
+      }
+
+      for (let i = segments.length - 1; i >= 0; i--) {
+        segments[i].draw(ctx, i);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>

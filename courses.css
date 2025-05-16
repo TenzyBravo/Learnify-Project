@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #f4f4f4;
+    background-color: #E87A64;
     padding: 20px;
 }
 
@@ -18,7 +18,7 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: white;
+    background-color: #132541;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px 0;
     margin-bottom: 20px;
@@ -36,7 +36,7 @@ body {
 }
 
 .highlight {
-    color: #3498db;
+    color: hsl(19, 70%, 53%);
 }
 
 .main-nav ul {
@@ -50,13 +50,13 @@ body {
 
 .main-nav a {
     text-decoration: none;
-    color: #333;
+    color: #F7F4F4;
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #3498db;
+    color: #E87A64;
 }
 
 /* Page Header */
@@ -64,7 +64,7 @@ body {
     text-align: center;
     margin-bottom: 40px;
     padding: 20px;
-    background-color: white;
+    background-color: #F9E4DA;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -104,7 +104,7 @@ body {
 }
 
 .course-card {
-    background-color: white;
+    background-color: #F9E4DA;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -223,7 +223,7 @@ body {
 
 .detail-header {
     padding: 30px;
-    background-color: #4e73df;
+    background-color: #E87A64;
     color: white;
 }
 
