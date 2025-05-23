@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="dashboard-page">
+  
   <!-- Header -->
   <header class="header dashboard-header" role="banner">
     <div class="container">
@@ -26,7 +27,7 @@
       <nav class="main-nav" role="navigation">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
+          <li><a href="courses.html">Course</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="Modal.html">Signup</a></li>
@@ -40,8 +41,8 @@
         </div>
 
         <div class="user-profile" id="userProfile" tabindex="0">
-          <img src="https://via.placeholder.com/40x40" alt="User avatar: John Doe" />
-          <span>John Doe</span>
+          <img src="images/profil.jpg" alt="User avatar: Temwani Zangi Zgambo" />
+          <span>Temwani Zgambo</span>
           <i class="fas fa-chevron-down" aria-hidden="true"></i>
 
           <div class="dropdown-menu" role="menu">
@@ -55,21 +56,21 @@
         </div>
       </div>
 
-      <div class="mobile-menu-toggle" aria-label="Toggle menu">
+      <div class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
         <i class="fas fa-bars"></i>
       </div>
     </div>
   </header>
 
   <!-- Dashboard Layout -->
-  <div class="dashboard-container">
+  <div class="dashboard-container" style="display: flex; gap: 2rem; padding: 2rem;">
     <!-- Sidebar Navigation -->
-    <aside class="dashboard-sidebar" role="complementary">
+    <aside class="dashboard-sidebar" style="flex-shrink: 0; min-width: 220px;" role="complementary" tabindex="0">
       <nav class="sidebar-nav">
         <ul>
           <li class="active"><a href="#"><i class="fas fa-th-large"></i> Dashboard</a></li>
           <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
-          <li><a href="#"><i class="fas fa-calendar"></i> Schedule</a></li>
+          <li><a href="#"><i class="fas fa-calendar"></i> Timetabl</a></li>
           <li><a href="#"><i class="fas fa-tasks"></i> Assignments</a></li>
           <li><a href="#"><i class="fas fa-star"></i> Wishlist</a></li>
           <li><a href="#"><i class="fas fa-certificate"></i> Certificates</a></li>
@@ -83,17 +84,15 @@
       </div>
     </aside>
 
-    <!-- Main Dashboard Content -->
-    <main class="dashboard-main" role="main">
-      <!-- Welcome Section -->
-      <section class="welcome-section">
+    <!-- contents on the dashboard -->
+    <main class="dashboard-main" role="main" style="padding: 2rem; max-width: 1000px; margin: 0 auto;">
+      <section class="welcome-section" aria-labelledby="welcome-heading">
         <header class="welcome-header">
-          <h1>Welcome back, <span id="userName">John</span>!</h1>
-          <p class="date-display" id="currentDate">Friday, April 25, 2025</p>
+          <h1 id="welcome-heading">Ready to Learn!!!, <span id="userName">Temwani Zgambo</span>!</h1>
+          <p class="date-display" id="currentDate">Friday, April 25, 2025</p> 
         </header>
 
         <div class="quick-stats">
-          <!-- Use article for individual stat cards -->
           <article class="stat-card" aria-label="Enrolled Courses">
             <div class="stat-icon enrolled"><i class="fas fa-book-open"></i></div>
             <div class="stat-info">
@@ -126,9 +125,10 @@
             </div>
           </article>
         </div>
-              <!-- Recent Activity -->
-      <section class="recent-activity">
-        <h2>Recent Activity</h2>
+      </section>
+
+      <section class="recent-activity" aria-labelledby="activity-heading">
+        <h2 id="activity-heading">Recent Activity</h2>
         <ul class="activity-list">
           <li><i class="fas fa-check-circle"></i> Completed: HTML Basics</li>
           <li><i class="fas fa-play-circle"></i> Started: CSS Flexbox</li>
@@ -143,29 +143,60 @@
     <p>&copy; 2025 Learnify. All rights reserved.</p>
   </footer>
 
-  <!-- JS Scripts (optional interaction features) -->
+  <!-- JS Scripts -->
   <script>
-    // Set dynamic date
-    document.getElementById("currentDate").textContent = new Date().toLocaleDateString('en-US', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
+    window.addEventListener('DOMContentLoaded', () => {
+      const dateElement = document.getElementById("currentDate");
+      if (dateElement) {
+        dateElement.textContent = new Date().toLocaleDateString('en-US', {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+      }
 
-    // Toggle profile dropdown
-    const userProfile = document.getElementById("userProfile");
-    userProfile.addEventListener("click", () => {
-      userProfile.classList.toggle("open");
-    });
+      const userProfile = document.getElementById("userProfile");
+      userProfile.addEventListener("click", () => {
+        userProfile.classList.toggle("open");
+      });
 
-    // Logout functionality (placeholder)
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      alert("You have been logged out!");
-      // Redirect or clear auth logic
-    });
-    document.getElementById("sidebarLogoutBtn").addEventListener("click", () => {
-      alert("Logged out from sidebar.");
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        alert("You have been logged out!");
+      });
+      document.getElementById("sidebarLogoutBtn").addEventListener("click", () => {
+        alert("Logged out from sidebar.");
+      });
+
+      function loadDashboardStats() {
+        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+        const total = enrolledCourses.length;
+        const inProgress = enrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length;
+        const completed = enrolledCourses.filter(c => c.progress === 100).length;
+
+        document.querySelector('.stat-card[aria-label="Enrolled Courses"] .stat-number').textContent = total;
+        document.querySelector('.stat-card[aria-label="In Progress"] .stat-number').textContent = inProgress;
+        document.querySelector('.stat-card[aria-label="Completed Courses"] .stat-number').textContent = completed;
+        document.querySelector('.stat-card[aria-label="Earned Certificates"] .stat-number').textContent = completed;
+      }
+
+      function loadRecentActivity() {
+        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+        const activityList = document.querySelector('.activity-list');
+        activityList.innerHTML = '';
+
+        enrolledCourses.forEach(course => {
+          if (course.progress === 100) {
+            activityList.innerHTML += `<li><i class="fas fa-check-circle"></i> Completed: ${course.name}</li>`;
+          } else if (course.progress > 0) {
+            activityList.innerHTML += `<li><i class="fas fa-play-circle"></i> Started: ${course.name}</li>`;
+          }
+        });
+      }
+
+      // Run updates
+      loadDashboardStats();
+      loadRecentActivity();
+
+      
     });
   </script>
 </body>
 </html>
-
-      

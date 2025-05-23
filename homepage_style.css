@@ -62,7 +62,9 @@ a {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #ff6f61, #ffb13e);
+  background: url('images/Homepage.jpeg');
+  background-size: cover;
+  background-position: center;
   color: #fff;
   padding: 100px 0;
   text-align: center;

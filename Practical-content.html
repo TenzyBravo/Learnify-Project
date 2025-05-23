@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learnify - Practical Content</title>
-  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="practical-content.css" />
   <link rel="stylesheet" href="css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -90,70 +90,44 @@
     </div>
   </section>
 
-  <!-- Featured Projects -->
-  <section class="featured-projects">
-    <div class="container">
-      <h2>Featured Student Projects</h2>
-      <p>See what our students have built using skills learned on Learnify</p>
-      
-      <div class="projects-grid">
-        <!-- Project 1 -->
+  <!-- Featured Projects Carousel -->
+<!-- Featured Projects Carousel -->
+<section class="projects-section">
+  <div class="container">
+    <div class="section-intro">
+      <h2>Student Featured Projects</h2>
+      <p>Explore real-world solutions built by our learners</p>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <!-- Project Card 1 -->
         <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/300" alt="E-commerce App Project" />
-          </div>
-          <div class="project-info">
-            <h3>E-commerce Mobile App</h3>
-            <p class="project-course">From: Full Stack Mobile Development Course</p>
-            <p class="project-description">A fully functional e-commerce application built with React Native and a Node.js backend.</p>
-            <div class="project-tech">
-              <span>React Native</span>
-              <span>Node.js</span>
-              <span>MongoDB</span>
-              <span>Redux</span>
-            </div>
-            <a href="#" class="btn btn-secondary">View Project</a>
-          </div>
+          <img src="images/current-location_16993439.png" alt="Attendance Tracker App" class="project-image">
+          <h3>Attendance Tracker App</h3>
+          <p>A mobile app for school attendance using QR codes.</p>
         </div>
-        
-        <!-- Project 2 -->
+        <!-- Project Card 2 -->
         <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/300" alt="Data Visualization Dashboard" />
-          </div>
-          <div class="project-info">
-            <h3>Climate Data Dashboard</h3>
-            <p class="project-course">From: Data Visualization with Python Course</p>
-            <p class="project-description">An interactive dashboard visualizing climate change data using Python, Pandas, and Plotly.</p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>Pandas</span>
-              <span>Plotly</span>
-              <span>Flask</span>
-            </div>
-            <a href="#" class="btn btn-secondary">View Project</a>
-          </div>
+          <img src="images/ecommerce_2415292.png" alt="E-commerce Website" class="project-image">
+          <h3>E-commerce Website</h3>
+          <p>Online store built with HTML, CSS, and JavaScript.</p>
         </div>
-        
-        <!-- Project 3 -->
+        <!-- Card number 3 -->
         <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/300" alt="AI Chatbot Project" />
-          </div>
-          <div class="project-info">
-            <h3>Customer Support AI Chatbot</h3>
-            <p class="project-course">From: Machine Learning Applications Course</p>
-            <p class="project-description">A natural language processing chatbot that handles customer support queries automatically.</p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>TensorFlow</span>
-              <span>NLP</span>
-              <span>Flask</span>
-            </div>
-            <a href="#" class="btn btn-secondary">View Project</a>
-          </div>
+          <img src="images/chat_10968388.png" alt="Chatbot for FAQs" class="project-image">
+          <h3>Chatbot for FAQs</h3>
+          <p>An AI-powered chatbot for answering student queries.</p>
+        </div>
+        <!-- Card number 4 -->
+        <div class="project-card">
+          <img src="images/booking_2664669.png" alt="Student Portal" class="project-image">
+          <h3>Student Portal</h3>
+          <p>Web-based dashboard for managing assignments.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
       
       <div class="view-more">
         <a href="#" class="btn btn-primary">View More Projects</a>
@@ -162,20 +136,24 @@
   </section>
   
   <!-- Learning Tools -->
+   <div class = benifits-grid></div>
   <section class="learning-tools">
     <div class="container">
       <h2>Our Learning Tools</h2>
       <p>State-of-the-art tools and platforms to support your practical learning</p>
       
-      <div class="tools-grid">
-        <div class="tool-card">
-          <i class="fas fa-laptop-code"></i>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-briefcase"></i>
           <h3>Interactive Code Editor</h3>
           <p>Practice coding directly in your browser with our powerful interactive editor.</p>
         </div>
         
-        <div class="tool-card">
-          <i class="fas fa-cloud"></i>
+        < <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-briefcase"></i>
           <h3>Cloud Development Environment</h3>
           <p>Access fully configured development environments without installing anything locally.</p>
         </div>

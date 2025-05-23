@@ -1,121 +1,253 @@
-// Sample course data (in real case, you’d fetch this from an API or database)
-const allCourses = [
+// Sample course data - in a real application, this would come from a database
+const courses = [
     {
-        title: "JavaScript for Beginners",
-        category: "programming",
-        level: "beginner",
-        popularity: 90,
-        price: 0,
-        image: "img/js-course.jpg"
+        id: 1,
+        title: "Introduction to Web Development",
+        description: "Learn the fundamentals of web development, including HTML, CSS, and JavaScript.",
+        image: "images/wep dev.jpeg",
+        category: "Programming",
+        instructor: "Tenzy Bravo",
+        rating: 4.8,
+        curriculum: [
+            "HTML Basics and Document Structure",
+            "CSS Styling and Layouts",
+            "JavaScript Fundamentals",
+            "DOM Manipulation",
+            "Building Responsive Websites"
+        ],
+        fullDescription: "This comprehensive course will take you from zero knowledge to building fully functional websites. You'll learn how to structure content with HTML, style it with CSS, and add interactivity with JavaScript. By the end of this course, you'll have the skills to create responsive and dynamic web pages from scratch."
     },
     {
-        title: "Advanced Business Strategy",
-        category: "business",
-        level: "advanced",
-        popularity: 75,
-        price: 49,
-        image: "img/business-course.jpg"
+        id: 2,
+        title: "Data Science Fundamentals",
+        description: "Master the essential skills needed for data analysis and visualization.",
+        image: "images/data science.jpg",
+        category: "Data Science",
+        instructor: "Michael Chen",
+        rating: 4.9,
+        curriculum: [
+            "Introduction to Python for Data Science",
+            "Data Cleaning and Preprocessing",
+            "Statistical Analysis",
+            "Data Visualization Techniques",
+            "Introduction to Machine Learning"
+        ],
+        fullDescription: "This course provides a solid foundation in data science methodologies. You'll learn to use Python for data manipulation, apply statistical techniques to gain insights, create compelling visualizations, and build predictive models. Ideal for beginners looking to enter the exciting field of data science."
     },
     {
-        title: "Intro to Graphic Design",
-        category: "design",
-        level: "beginner",
-        popularity: 85,
-        price: 30,
-        image: "img/design-course.jpg"
+        id: 3,
+        title: "Digital Marketing Mastery",
+        description: "Learn effective strategies to grow your business online.",
+        image: "images/marketing.jpg",
+        category: "Marketing",
+        instructor: "Jessica Williams",
+        rating: 4.7,
+        curriculum: [
+            "Digital Marketing Strategy",
+            "Search Engine Optimization (SEO)",
+            "Social Media Marketing",
+            "Email Marketing Campaigns",
+            "Analytics and Performance Tracking"
+        ],
+        fullDescription: "Transform your marketing approach with this comprehensive digital marketing course. You'll learn how to develop effective online strategies, optimize your content for search engines, engage audiences on social media, build email campaigns, and measure your success through analytics."
     },
     {
-        title: "Spanish Language Basics",
-        category: "languages",
-        level: "beginner",
-        popularity: 60,
-        price: 20,
-        image: "img/spanish-course.jpg"
+        id: 4,
+        title: "UI/UX Design Principles",
+        description: "Create engaging user experiences with modern design principles.",
+        image: "images/ux.jpg",
+        category: "Design",
+        instructor: "David Garcia",
+        rating: 4.8,
+        curriculum: [
+            "User Experience Fundamentals",
+            "User Interface Design Elements",
+            "Wireframing and Prototyping",
+            "User Research Methods",
+            "Design Systems and Documentation"
+        ],
+        fullDescription: "Develop the skills to design intuitive and beautiful digital products. This course covers the entire design process from user research to final implementation. You'll learn to create wireframes, build prototypes, conduct usability testing, and design systems that scale. Perfect for aspiring designers or developers wanting to improve their design skills."
+    },
+    {
+        id: 5,
+        title: "Financial Planning & Investment",
+        description: "Build wealth through smart financial planning and investment strategies.",
+        image: "images/financial.jpg",
+        category: "Finance",
+        instructor: "Robert Wilson",
+        rating: 4.6,
+        curriculum: [
+            "Personal Financial Planning",
+            "Investment Fundamentals",
+            "Retirement Planning Strategies",
+            "Tax-Efficient Investing",
+            "Portfolio Management"
+        ],
+        fullDescription: "Take control of your financial future with this practical financial planning course. You'll learn how to create a personal financial plan, understand different investment vehicles, prepare for retirement, minimize taxes, and build a diversified portfolio that matches your risk tolerance and financial goals."
+    },
+    {
+        id: 6,
+        title: "Mobile App Development with React Native",
+        description: "Build cross-platform mobile apps with React Native framework.",
+        image: "images/mobile.jpg",
+        category: "Programming",
+        instructor: "Alex Turner",
+        rating: 4.9,
+        curriculum: [
+            "React Native Fundamentals",
+            "Cross-Platform UI Components",
+            "State Management",
+            "Navigation and Routing",
+            "Publishing to App Stores"
+        ],
+        fullDescription: "Learn to build native mobile applications for both iOS and Android using a single codebase with React Native. This course covers component-based architecture, styling, navigation patterns, state management, and integration with device features. By the end, you'll be able to publish professional apps to app stores."
     }
-    // Add more as needed
 ];
 
-const searchInput = document.getElementById("courseSearch");
-const categoryFilter = document.getElementById("categoryFilter");
-const levelFilter = document.getElementById("levelFilter");
-const sortBy = document.getElementById("sortBy");
-const coursesGrid = document.getElementById("coursesGrid");
-const coursesCount = document.getElementById("coursesCount");
+// Enrollment function - properly integrated
+function enrollCourse(courseId, courseTitle) {
+    let courses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+    const alreadyEnrolled = courses.some(course => course.id === courseId);
+    
+    if (alreadyEnrolled) {
+        alert(`You're already enrolled in "${courseTitle}".`);
+        return;
+    }
+    
+    courses.push({ id: courseId, name: courseTitle, progress: 0 });
+    localStorage.setItem('enrolledCourses', JSON.stringify(courses));
+    alert(`Successfully enrolled in "${courseTitle}"!`);
+    
+    // Close the course detail modal after enrollment
+    document.getElementById('course-detail').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
 
-// Remove loader after DOM is ready
-window.addEventListener("DOMContentLoaded", () => {
-    renderCourses();
-    document.querySelector(".course-loader").style.display = "none";
+// Function to generate course cards
+function generateCourseCards() {
+    const coursesGrid = document.getElementById('courses-grid');
+    coursesGrid.innerHTML = '';
+    
+    courses.forEach(course => {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        courseCard.setAttribute('data-id', course.id);
+        
+        courseCard.innerHTML = `
+            <div class="course-image">
+                <img src="${course.image}" alt="${course.title}">
+                <div class="course-category">${course.category}</div>
+            </div>
+            <div class="course-content">
+                <h3 class="course-title">${course.title}</h3>
+                <p class="course-description">${course.description}</p>
+                <div class="course-meta">
+                    <div class="course-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>${course.rating}</span>
+                    </div>
+                    <div class="course-instructor">by ${course.instructor}</div>
+                </div>
+            </div>
+        `;
+        
+        courseCard.addEventListener('click', () => {
+            showCourseDetail(course);
+        });
+        
+        coursesGrid.appendChild(courseCard);
+    });
+}
+
+// Function to show course details
+function showCourseDetail(course) {
+    const courseDetail = document.getElementById('course-detail');
+    const detailTitle = document.getElementById('detail-title');
+    const detailInstructor = document.getElementById('detail-instructor');
+    const detailCategory = document.getElementById('detail-category');
+    const detailDescription = document.getElementById('detail-description');
+    const curriculumList = document.getElementById('curriculum-list');
+    const enrollBtn = document.getElementById('enrollBtn');
+    
+    detailTitle.textContent = course.title;
+    detailInstructor.textContent = `Instructor: ${course.instructor}`;
+    detailCategory.textContent = `Category: ${course.category}`;
+    detailDescription.textContent = course.fullDescription;
+    
+    // Clear previous curriculum items
+    curriculumList.innerHTML = '';
+    
+    // Add curriculum items
+    course.curriculum.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'curriculum-item';
+        li.textContent = item;
+        curriculumList.appendChild(li);
+    });
+    
+    // Bind the enroll button - this is the key fix
+    enrollBtn.onclick = () => enrollCourse(course.id, course.title);
+    
+    courseDetail.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling of body
+}
+
+// Close course detail
+document.getElementById('close-detail').addEventListener('click', () => {
+    document.getElementById('course-detail').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
 });
 
-// Listen for changes
-searchInput.addEventListener("input", renderCourses);
-categoryFilter.addEventListener("change", renderCourses);
-levelFilter.addEventListener("change", renderCourses);
-sortBy.addEventListener("change", renderCourses);
-
-function renderCourses() {
-    let filtered = [...allCourses];
-
-    // Search
-    const searchTerm = searchInput.value.toLowerCase();
-    if (searchTerm) {
-        filtered = filtered.filter(course =>
-            course.title.toLowerCase().includes(searchTerm)
-        );
+// Filter courses by search input
+document.getElementById('search-input').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    
+    const filteredCourses = courses.filter(course => 
+        course.title.toLowerCase().includes(searchTerm) || 
+        course.description.toLowerCase().includes(searchTerm) ||
+        course.category.toLowerCase().includes(searchTerm)
+    );
+    
+    const coursesGrid = document.getElementById('courses-grid');
+    coursesGrid.innerHTML = '';
+    
+    if (filteredCourses.length === 0) {
+        coursesGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 30px;">No courses found matching your search.</p>';
+        return;
     }
-
-    // Filter by category
-    const category = categoryFilter.value;
-    if (category !== "all") {
-        filtered = filtered.filter(course => course.category === category);
-    }
-
-    // Filter by level
-    const level = levelFilter.value;
-    if (level !== "all") {
-        filtered = filtered.filter(course => course.level === level);
-    }
-
-    // Sort
-    const sortOption = sortBy.value;
-    switch (sortOption) {
-        case "popular":
-            filtered.sort((a, b) => b.popularity - a.popularity);
-            break;
-        case "newest":
-            // Add a date field in course objects to use this
-            break;
-        case "price-low":
-            filtered.sort((a, b) => a.price - b.price);
-            break;
-        case "price-high":
-            filtered.sort((a, b) => b.price - a.price);
-            break;
-    }
-
-    // Update course count
-    coursesCount.textContent = filtered.length;
-
-    // Render HTML
-    coursesGrid.innerHTML = filtered.map(course => `
-        <div class="course-card">
-            <img src="${course.image}" alt="${course.title}">
-            <div class="course-info">
-                <h3>${course.title}</h3>
-                <p>Category: ${capitalize(course.category)}</p>
-                <p>Level: ${capitalize(course.level)}</p>
-                <p class="price">${course.price === 0 ? "Free" : `$${course.price}`}</p>
-                <a href="#" class="btn btn-outline">View Course</a>
+    
+    filteredCourses.forEach(course => {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        courseCard.setAttribute('data-id', course.id);
+        
+        courseCard.innerHTML = `
+            <div class="course-image">
+                <img src="${course.image}" alt="${course.title}">
+                <div class="course-category">${course.category}</div>
             </div>
-        </div>
-    `).join("");
+            <div class="course-content">
+                <h3 class="course-title">${course.title}</h3>
+                <p class="course-description">${course.description}</p>
+                <div class="course-meta">
+                    <div class="course-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>${course.rating}</span>
+                    </div>
+                    <div class="course-instructor">by ${course.instructor}</div>
+                </div>
+            </div>
+        `;
+        
+        courseCard.addEventListener('click', () => {
+            showCourseDetail(course);
+        });
+        
+        coursesGrid.appendChild(courseCard);
+    });
+});
 
-    if (filtered.length === 0) {
-        coursesGrid.innerHTML = `<p>No courses found matching your criteria.</p>`;
-    }
-}
-
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
+// Initialize the page
+window.onload = function() {
+    generateCourseCards();
+};
