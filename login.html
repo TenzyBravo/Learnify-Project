@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Learnify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <div class="image-section">
+      <div class="logo-container">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+      </div>
+      <div class="hero-content">
+        <h2>Expand Your Knowledge</h2>
+        <p>Join thousands of students learning with Learnify's interactive courses</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="login-form">
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h1>Welcome Back to Learnify</h1>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input-container">
+            <input type="password" id="password" placeholder="Password">
+            <button class="password-toggle" onclick="togglePassword()">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <button class="login-btn" onclick="login()">Sign In</button>
+        <a href="#" class="forgot-password" onclick="showMessage('Password reset link sent!', 'success')">Forgot password?</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

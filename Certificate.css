@@ -20,7 +20,7 @@ h1, h2, h3 {
 
 /* Header */
 .header {
-  background-color: #2c3e50;
+  background-color:black;
   color: #fff;
   padding: 20px 0;
 }
@@ -31,7 +31,7 @@ h1, h2, h3 {
 }
 
 .logo .highlight {
-  color: #f39c12;
+  color: #ff6f61;
 }
 
 .main-nav ul {
@@ -56,7 +56,7 @@ h1, h2, h3 {
 
 .main-nav ul li a.active,
 .main-nav ul li a:hover {
-  background-color: #f39c12;
+  background-color: #ff6f61;
   border-radius: 4px;
 }
 
@@ -96,7 +96,7 @@ h1, h2, h3 {
 
 .benefit-icon i {
   font-size: 36px;
-  color: #f39c12;
+  color: #ff6f61;
   margin-bottom: 10px;
 }
 
@@ -153,7 +153,7 @@ h1, h2, h3 {
 
 /* CTA Section */
 .cta-certification {
-  background: #f39c12;
+  background: #ff6f61;
   color: #fff;
   padding: 50px 20px;
   text-align: center;
@@ -166,7 +166,7 @@ h1, h2, h3 {
 
 .cta-certification .btn-primary {
   background-color: #fff;
-  color: #f39c12;
+  color: #ff6f61;
   padding: 12px 24px;
   font-weight: bold;
   border: none;
@@ -217,10 +217,9 @@ h1, h2, h3 {
 }
 
 .social-links a:hover {
-  color: #f39c12;
+  color: #ff6f61;
 }
 
-/* Responsive Tweaks */
 @media (max-width: 768px) {
   .main-nav ul {
     flex-direction: column;

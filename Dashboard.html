@@ -6,12 +6,13 @@
   <title>Dashboard - Learnify</title>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="Dashboard.CSS" />
+  <link rel="stylesheet" href="dashboard.CSS" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css" />
 </head>
 <body class="dashboard-page">
   
@@ -27,29 +28,50 @@
       <nav class="main-nav" role="navigation">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="courses.html">Course</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="Modal.html">Signup</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="progress.html">My Progress</a></li>
+          <li><a href="https://www.w3schools.com/css/css_colors_hex.asp">Resources</a></li>
+          <li><a href="community.html">Community</a></li>
         </ul>
       </nav>
 
       <div class="user-menu">
-        <div class="notifications" aria-label="Notifications">
+        <div class="notifications" aria-label="Notifications" id="notificationsBtn">
           <i class="fas fa-bell"></i>
           <span class="notification-count" aria-hidden="true">3</span>
+          <div class="notifications-dropdown">
+            <h3>Notifications</h3>
+            <ul>
+              <li class="unread">
+                <i class="fas fa-bookmark"></i>
+                <p>New course "Advanced JavaScript" added to your wishlist</p>
+                <span class="notification-time">2h ago</span>
+              </li>
+              <li>
+                <i class="fas fa-comment"></i>
+                <p>Instructor replied to your question in "CSS Mastery"</p>
+                <span class="notification-time">1d ago</span>
+              </li>
+              <li>
+                <i class="fas fa-certificate"></i>
+                <p>Certificate ready for "HTML Fundamentals"</p>
+                <span class="notification-time">3d ago</span>
+              </li>
+            </ul>
+            <a href="#" class="view-all">View All Notifications</a>
+          </div>
         </div>
 
         <div class="user-profile" id="userProfile" tabindex="0">
-          <img src="images/profil.jpg" alt="User avatar: Temwani Zangi Zgambo" />
+          <img src="image/profile.jpg" alt="User avatar: Temwani Zangi Zgambo" />
           <span>Temwani Zgambo</span>
           <i class="fas fa-chevron-down" aria-hidden="true"></i>
 
           <div class="dropdown-menu" role="menu">
             <ul>
-              <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li>
-              <li><a href="#"><i class="fas fa-cog"></i> Account Settings</a></li>
-              <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+              <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+              <li><a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+              <li><a href="achievements.html"><i class="fas fa-trophy"></i> Achievements</a></li>
               <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
           </div>
@@ -63,33 +85,46 @@
   </header>
 
   <!-- Dashboard Layout -->
-  <div class="dashboard-container" style="display: flex; gap: 2rem; padding: 2rem;">
+  <div class="dashboard-container">
     <!-- Sidebar Navigation -->
-    <aside class="dashboard-sidebar" style="flex-shrink: 0; min-width: 220px;" role="complementary" tabindex="0">
+    <aside class="dashboard-sidebar" role="complementary" tabindex="0">
       <nav class="sidebar-nav">
         <ul>
           <li class="active"><a href="#"><i class="fas fa-th-large"></i> Dashboard</a></li>
-          <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
-          <li><a href="#"><i class="fas fa-calendar"></i> Timetabl</a></li>
-          <li><a href="#"><i class="fas fa-tasks"></i> Assignments</a></li>
-          <li><a href="#"><i class="fas fa-star"></i> Wishlist</a></li>
-          <li><a href="#"><i class="fas fa-certificate"></i> Certificates</a></li>
-          <li><a href="#"><i class="fas fa-comments"></i> Messages</a></li>
-          <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-          <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+          <li><a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+          <li><a href="assignments.html"><i class="fas fa-tasks"></i> Assignments</li>
+          <li><a href="discussions.html"><i class="fas fa-comments"></i> Discussions</a></li>
+          <li><a href="grades.html"><i class="fas fa-chart-bar"></i> Grades</a></li>
+          <li><a href="resources.html"><i class="fas fa-file-alt"></i> Resources</a></li>
+          <li><a href="Certification.html"><i class="fas fa-certificate"></i> Certificates</a></li>
         </ul>
       </nav>
       <div class="sidebar-footer">
+        <div class="progress-summary">
+          <div class="progress-circle">
+            <svg class="progress-ring" width="60" height="60">
+              <circle class="progress-ring-circle" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+            </svg>
+            <span class="progress-percent">75%</span>
+          </div>
+          <p>Overall Completion</p>
+        </div>
         <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
       </div>
     </aside>
 
-    <!-- contents on the dashboard -->
-    <main class="dashboard-main" role="main" style="padding: 2rem; max-width: 1000px; margin: 0 auto;">
+    <!-- Main Content -->
+    <main class="dashboard-main" role="main">
       <section class="welcome-section" aria-labelledby="welcome-heading">
         <header class="welcome-header">
-          <h1 id="welcome-heading">Ready to Learn!!!, <span id="userName">Temwani Zgambo</span>!</h1>
-          <p class="date-display" id="currentDate">Friday, April 25, 2025</p> 
+          <div>
+            <h1 id="welcome-heading">Welcome Back, <span id="userName">Temwani Zgambo</span>!</h1>
+            <p class="date-display" id="currentDate">Friday, April 25, 2025</p>
+          </div>
+          <button class="btn-primary" id="quickActionBtn">
+            <i class="fas fa-plus"></i> Enroll in New Course
+          </button>
         </header>
 
         <div class="quick-stats">
@@ -98,6 +133,7 @@
             <div class="stat-info">
               <h3>Enrolled Courses</h3>
               <span class="stat-number">5</span>
+              <span class="stat-change positive">+2 this month</span>
             </div>
           </article>
 
@@ -106,6 +142,7 @@
             <div class="stat-info">
               <h3>In Progress</h3>
               <span class="stat-number">3</span>
+              <span class="stat-change neutral">0 change</span>
             </div>
           </article>
 
@@ -114,89 +151,355 @@
             <div class="stat-info">
               <h3>Completed</h3>
               <span class="stat-number">2</span>
+              <span class="stat-change positive">+1 this week</span>
             </div>
           </article>
 
-          <article class="stat-card" aria-label="Earned Certificates">
-            <div class="stat-icon certificate"><i class="fas fa-certificate"></i></div>
+          <article class="stat-card" aria-label="Learning Streak">
+            <div class="stat-icon streak"><i class="fas fa-fire"></i></div>
             <div class="stat-info">
-              <h3>Certificates</h3>
-              <span class="stat-number">2</span>
+              <h3>Learning Streak</h3>
+              <span class="stat-number">12 days</span>
+              <span class="stat-change positive">Keep going!</span>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="recent-activity" aria-labelledby="activity-heading">
-        <h2 id="activity-heading">Recent Activity</h2>
-        <ul class="activity-list">
-          <li><i class="fas fa-check-circle"></i> Completed: HTML Basics</li>
-          <li><i class="fas fa-play-circle"></i> Started: CSS Flexbox</li>
-          <li><i class="fas fa-comment"></i> Commented on: JavaScript Intro</li>
-        </ul>
+      <div class="dashboard-grid">
+        <!-- Progress Overview Section -->
+        <section class="progress-section" aria-labelledby="progress-heading">
+          <header class="section-header">
+            <h2 id="progress-heading">Your Learning Progress</h2>
+            <div class="time-filter">
+              <button class="active">Weekly</button>
+              <button>Monthly</button>
+              <button>All Time</button>
+            </div>
+          </header>
+          <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+          </div>
+        </section>
+
+        <!-- Active Courses Section -->
+        <section class="courses-section" aria-labelledby="courses-heading">
+          <header class="section-header">
+            <h2 id="courses-heading">Active Courses</h2>
+            <a href="my-courses.html" class="view-all">View All</a>
+          </header>
+          <div class="course-cards">
+            <article class="course-card">
+              <div class="course-image" style="background-image: url('images/course-js.jpg');">
+                <span class="course-category">Programming</span>
+                <div class="course-progress">
+                  <div class="progress-bar" style="width: 65%"></div>
+                  <span>65% Complete</span>
+                </div>
+              </div>
+              <div class="course-info">
+                <h3>JavaScript Advanced Concepts</h3>
+                <p class="course-instructor">By Dr. Sarah Johnson</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-play-circle"></i> 12/18 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 8h remaining</span>
+                </div>
+                <button class="btn-continue">Continue Learning</button>
+              </div>
+            </article>
+
+            <article class="course-card">
+              <div class="course-image" style="background-image: url('images/course-css.jpg');">
+                <span class="course-category">Design</span>
+                <div class="course-progress">
+                  <div class="progress-bar" style="width: 30%"></div>
+                  <span>30% Complete</span>
+                </div>
+              </div>
+              <div class="course-info">
+                <h3>CSS Mastery: Flexbox & Grid</h3>
+                <p class="course-instructor">By Michael Chen</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-play-circle"></i> 5/15 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 12h remaining</span>
+                </div>
+                <button class="btn-continue">Continue Learning</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="activity-section" aria-labelledby="activity-heading">
+          <header class="section-header">
+            <h2 id="activity-heading">Recent Activity</h2>
+            <a href="activity.html" class="view-all">View All</a>
+          </header>
+          <ul class="activity-list">
+            <li class="activity-item">
+              <div class="activity-icon completed">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="activity-content">
+                <p>Completed: <strong>HTML Fundamentals</strong> course</p>
+                <span class="activity-time">Yesterday at 4:23 PM</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-icon comment">
+                <i class="fas fa-comment"></i>
+              </div>
+              <div class="activity-content">
+                <p>Posted a question in <strong>CSS Mastery</strong> discussion</p>
+                <span class="activity-time">2 days ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-icon achievement">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <div class="activity-content">
+                <p>Earned <strong>Fast Learner</strong> achievement</p>
+                <span class="activity-time">3 days ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-icon enrolled">
+                <i class="fas fa-bookmark"></i>
+              </div>
+              <div class="activity-content">
+                <p>Enrolled in <strong>JavaScript Advanced Concepts</strong></p>
+                <span class="activity-time">1 week ago</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Upcoming Deadlines Section -->
+        <section class="deadlines-section" aria-labelledby="deadlines-heading">
+          <header class="section-header">
+            <h2 id="deadlines-heading">Upcoming Deadlines</h2>
+            <a href="calendar.html" class="view-all">View Calendar</a>
+          </header>
+          <ul class="deadlines-list">
+            <li class="deadline-item urgent">
+              <div class="deadline-date">
+                <span class="day">28</span>
+                <span class="month">Apr</span>
+              </div>
+              <div class="deadline-info">
+                <h3>CSS Mastery - Assignment 3</h3>
+                <p>Responsive Layout Challenge</p>
+                <span class="deadline-time">Due in 3 days</span>
+              </div>
+              <button class="btn-small">View</button>
+            </li>
+            <li class="deadline-item">
+              <div class="deadline-date">
+                <span class="day">05</span>
+                <span class="month">May</span>
+              </div>
+              <div class="deadline-info">
+                <h3>JavaScript - Project Submission</h3>
+                <p>Interactive Web Application</p>
+                <span class="deadline-time">Due in 10 days</span>
+              </div>
+              <button class="btn-small">View</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Recommended Courses Section -->
+      <section class="recommended-section" aria-labelledby="recommended-heading">
+        <header class="section-header">
+          <h2 id="recommended-heading">Recommended For You</h2>
+          <a href="courses.html" class="view-all">Browse All Courses</a>
+        </header>
+        <div class="recommended-cards">
+          <article class="recommended-card">
+            <div class="recommended-image" style="background-image: url('images/course-react.jpg');"></div>
+            <div class="recommended-info">
+              <span class="course-level">Intermediate</span>
+              <h3>React.js Fundamentals</h3>
+              <div class="course-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span>4.7 (1,245)</span>
+              </div>
+              <div class="course-details">
+                <span><i class="fas fa-video"></i> 18 Lessons</span>
+                <span><i class="fas fa-clock"></i> 12 Hours</span>
+              </div>
+              <div class="course-actions">
+                <button class="btn-outline">Preview</button>
+                <button class="btn-primary">Enroll Now</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="recommended-card">
+            <div class="recommended-image" style="background-image: url('images/course-python.jpg');"></div>
+            <div class="recommended-info">
+              <span class="course-level">Beginner</span>
+              <h3>Python for Beginners</h3>
+              <div class="course-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span>5.0 (2,187)</span>
+              </div>
+              <div class="course-details">
+                <span><i class="fas fa-video"></i> 24 Lessons</span>
+                <span><i class="fas fa-clock"></i> 16 Hours</span>
+              </div>
+              <div class="course-actions">
+                <button class="btn-outline">Preview</button>
+                <button class="btn-primary">Enroll Now</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="recommended-card">
+            <div class="recommended-image" style="background-image: url('images/course-uiux.jpg');"></div>
+            <div class="recommended-info">
+              <span class="course-level">Advanced</span>
+              <h3>UI/UX Design Principles</h3>
+              <div class="course-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span>4.9 (892)</span>
+              </div>
+              <div class="course-details">
+                <span><i class="fas fa-video"></i> 15 Lessons</span>
+                <span><i class="fas fa-clock"></i> 10 Hours</span>
+              </div>
+              <div class="course-actions">
+                <button class="btn-outline">Preview</button>
+                <button class="btn-primary">Enroll Now</button>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
   </div>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Learnify. All rights reserved.</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Learnify</h3>
+          <p>Empowering your learning journey with quality education and interactive courses.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Newsletter</h3>
+          <p>Subscribe to get updates on new courses and features.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address">
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Learnify. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Accessibility</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <!-- JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <script src="dashboard.js"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const dateElement = document.getElementById("currentDate");
-      if (dateElement) {
-        dateElement.textContent = new Date().toLocaleDateString('en-US', {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-        });
-      }
-
-      const userProfile = document.getElementById("userProfile");
-      userProfile.addEventListener("click", () => {
-        userProfile.classList.toggle("open");
-      });
-
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        alert("You have been logged out!");
-      });
-      document.getElementById("sidebarLogoutBtn").addEventListener("click", () => {
-        alert("Logged out from sidebar.");
-      });
-
-      function loadDashboardStats() {
-        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
-        const total = enrolledCourses.length;
-        const inProgress = enrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length;
-        const completed = enrolledCourses.filter(c => c.progress === 100).length;
-
-        document.querySelector('.stat-card[aria-label="Enrolled Courses"] .stat-number').textContent = total;
-        document.querySelector('.stat-card[aria-label="In Progress"] .stat-number').textContent = inProgress;
-        document.querySelector('.stat-card[aria-label="Completed Courses"] .stat-number').textContent = completed;
-        document.querySelector('.stat-card[aria-label="Earned Certificates"] .stat-number').textContent = completed;
-      }
-
-      function loadRecentActivity() {
-        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
-        const activityList = document.querySelector('.activity-list');
-        activityList.innerHTML = '';
-
-        enrolledCourses.forEach(course => {
-          if (course.progress === 100) {
-            activityList.innerHTML += `<li><i class="fas fa-check-circle"></i> Completed: ${course.name}</li>`;
-          } else if (course.progress > 0) {
-            activityList.innerHTML += `<li><i class="fas fa-play-circle"></i> Started: ${course.name}</li>`;
+    // Initialize progress chart
+    const progressCtx = document.getElementById('progressChart').getContext('2d');
+    const progressChart = new Chart(progressCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Learning Progress',
+          data: [20, 35, 45, 60, 75, 85],
+          borderColor: '#667eea',
+          backgroundColor: 'rgba(102, 126, 234, 0.1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
           }
-        });
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
       }
-
-      // Run updates
-      loadDashboardStats();
-      loadRecentActivity();
-
-      
     });
+
+    // Initialize sidebar progress circle
+    const progressCircle = document.querySelector('.progress-ring-circle');
+    if (progressCircle) {
+      const radius = progressCircle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      
+      progressCircle.style.strokeDasharray = circumference;
+      progressCircle.style.strokeDashoffset = circumference - (75 / 100) * circumference;
+    }
   </script>
 </body>
 </html>

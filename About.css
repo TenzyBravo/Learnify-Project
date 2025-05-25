@@ -8,8 +8,8 @@
   /* Body Styling */
   body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
+    background-color: black;
+    color: white;
     line-height: 1.6;
   }
   
@@ -23,7 +23,7 @@
   
   /* Header */
   header {
-    background-color: #004aad;
+    background-color: #ff6f61;
     color: white;
     padding: 20px 0;
   }
@@ -56,7 +56,7 @@
   /* About Section */
   .about h2 {
     font-size: 32px;
-    color: #004aad;
+    color: #ff6f61;
     margin-bottom: 20px;
     text-align: center;
   }
@@ -72,7 +72,7 @@
   
   /* Footer */
   footer {
-    background-color: #004aad;
+    background-color: #ff6f61;
     color: white;
     text-align: center;
     padding: 20px 0;

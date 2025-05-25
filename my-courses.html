@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Courses | Learnify</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="my-courses.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <h1><span class="highlight">Learn</span>ify</h1>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="my-courses.html" class="active">My Courses</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>My Learning Journey</h1>
+        <p>Continue where you left off or explore your enrolled courses</p>
+      </div>
+
+      <div class="course-filters">
+        <div class="filter-group">
+          <label for="course-filter">Filter by:</label>
+          <select id="course-filter">
+            <option value="all">All Courses</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="newest">Newest First</option>
+          </select>
+        </div>
+        <div class="search-group">
+          <input type="text" id="course-search" placeholder="Search my courses...">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+
+      <div class="courses-container" id="courses-container">
+        <!-- Courses will be loaded here by JavaScript -->
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3>No courses enrolled yet</h3>
+          <p>Browse our catalog to find courses that match your interests</p>
+          <a href="courses.html" class="btn-primary">Explore Courses</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="my-courses.js"></script>
+</body>
+</html>

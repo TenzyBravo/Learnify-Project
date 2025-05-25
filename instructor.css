@@ -1,0 +1,94 @@
+
+    .instructors-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #141316 0%, #ff6f61 100%);
+      text-align: center;
+    }
+
+    .instructors-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .instructor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .instructor-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .instructor-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .instructor-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid #4CAF50;
+    }
+
+    .instructor-card h3 {
+      margin: 0.5rem 0;
+      color: #4CAF50;
+    }
+
+    .instructor-card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .view-courses-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .view-courses-btn:hover {
+      background-color: #45a049;
+    }
+    .header {
+  background-color: #1a1a1a;
+  padding: 20px 0;
+}
+
+.header .logo h1 {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.header .main-nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+}
+
+.header .main-nav ul li {
+  margin-left: 20px;
+}
+
+.header .main-nav ul li a {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.header .main-nav ul li a:hover {
+  color: #ff6f61;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Certificate</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    
+    .certificate {
+      width: 800px;
+      height: 600px;
+      background-color: #fff;
+      border: 15px solid #4361ee;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      background-image: url('images/login.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    
+    .certificate h1 {
+      color: #4361ee;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+    
+    .certificate h2 {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    
+    .student-name {
+      font-size: 32px;
+      color: #2b2d42;
+      font-weight: bold;
+      margin: 30px 0;
+      border-bottom: 2px solid #4361ee;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .course-title {
+      font-size: 28px;
+      color: #3a0ca3;
+      font-style: italic;
+    }
+    
+    .details {
+      margin: 30px 0;
+      font-size: 18px;
+    }
+    
+    .signatures {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 60px;
+    }
+    
+    .signature-line {
+      border-top: 1px solid #333;
+      width: 200px;
+      display: inline-block;
+      margin-top: 60px;
+    }
+    
+    .logo {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      height: 80px;
+    }
+    
+    .watermark {
+      opacity: 0.1;
+      position: absolute;
+      font-size: 120px;
+      color: #4361ee;
+      transform: rotate(-30deg);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate">
+    <div class="watermark">Learnify</div>
+    <img src="" alt="Learnify Logo" class="logo">
+    
+    <h1>Certificate of Completion</h1>
+    <h2>This is to certify that</h2>
+    
+    <div class="student-name" id="studentName">Josua Siame</div>
+    
+    <h2>has successfully completed the course</h2>
+    
+    <div class="course-title" id="courseTitle">Advanced Web Development</div>
+    
+    <div class="details">
+      <p>with a final grade of <span id="grade">92</span>%</p>
+      <p>Date of Completion: <span id="completionDate">June 15, 2025</span></p>
+      <p>Certificate ID: <span id="certificateId">LFY-2023-56789</span></p>
+    </div>
+    
+    <div class="signatures">
+      <div>
+        <div class="signature-line"></div>
+        <p>Instructor: <span id="instructorName">Temwani Zangi Zgambo</span></p>
+      </div>
+      <div>
+        <div class="signature-line"></div>
+        <p>Learnify E-Learning Academy</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // You can populate these values from your database or localStorage
+    document.getElementById('studentName').textContent = localStorage.getItem('currentUserName') || 'Student Name';
+    document.getElementById('courseTitle').textContent = localStorage.getItem('completedCourseTitle') || 'Course Title';
+    // Add more dynamic population as needed
+  </script>
+</body>
+</html>
